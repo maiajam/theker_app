@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6DCACA"
+    android:layoutDirection="rtl"
+    tools:context="com.maiajam.counter.listActivity">
+
+    <include
+
+        layout="@layout/content_list_" />
+
+    <LinearLayout
+        android:layout_gravity="bottom|end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/fab_margin"
+            android:background="#ffffff"
+            app:backgroundTint="#ffffff"
+            app:srcCompat="@drawable/plus_icon" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:background="#ffffff"
+            app:backgroundTint="#ffffff"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/minis_icon" />
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

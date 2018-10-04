@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#6dcaca</color>
+    <color name="colorText">#000000</color>
+
+
+    <color name="complete">#00FEA5</color>
+    <color name="step7" >#0EF0A8</color>
+    <color name="step6" >#1CE2AB</color>
+    <color name="step5" >#2AD4AE</color>
+    <color name="step4" >#39C5B1</color>
+    <color name="step3" >#47B7B4</color>
+    <color name="step2" >#55A9B7</color>
+    <color name="step1" >#639BBA</color>
+
+    <color name="backgroundColor">#6DCACA</color>
+</resources>

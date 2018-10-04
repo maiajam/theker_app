@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    tools:context="com.maiajam.counter.MainActivity">
+
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/theker_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+       >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lin1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/result_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/lin1"
+                android:layout_toEndOf="@id/lin1"
+
+                android:text="1000"
+                android:textColor="#ffffff"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/theker_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+
+                android:paddingBottom="5dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="5dp"
+                android:paddingEnd="0dp"
+                android:text="ds"
+                android:textAlignment="viewEnd"
+                android:textColor="#ffffff"
+
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
