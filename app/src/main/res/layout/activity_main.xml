@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context="com.maiajam.counter.MainActivity">
+    tools:context="com.maiajam.counter.ui.activity.MainActivity">
 
 
     <TextView

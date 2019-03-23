@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layoutDirection="rtl"
-    tools:context="com.maiajam.counter.MainActivity">
+    tools:context="com.maiajam.counter.ui.activity.MainActivity">
 
 
     <RelativeLayout

@@ -15,4 +15,11 @@
         android:icon="@android:drawable/ic_menu_share"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_OneTargetAllٌ"
+        android:orderInCategory="100"
+        android:title="@string/oneTarget"
+        android:icon="@android:drawable/ic_menu_share"
+        app:showAsAction="never" />
+
 </menu>

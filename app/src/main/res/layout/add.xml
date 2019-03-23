@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.maiajam.counter.MainActivity">
+    tools:context="com.maiajam.counter.ui.activity.MainActivity">
 
     <EditText
         android:id="@+id/theker_txt"

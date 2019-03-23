@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#6DCACA"
     android:layoutDirection="rtl"
-    tools:context="com.maiajam.counter.listActivity">
+    tools:context="com.maiajam.counter.ui.activity.listActivity">
 
     <include
 

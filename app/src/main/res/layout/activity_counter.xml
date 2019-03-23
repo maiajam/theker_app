@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/counter_lay"
     android:background="#6DCACA"
-    tools:context="com.maiajam.counter.CounterActivity">
+    tools:context="com.maiajam.counter.ui.activity.CounterActivity">
 
     <TextView
         android:id="@+id/count_text"
