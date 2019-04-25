@@ -35,7 +35,7 @@ public class dbHandler extends SQLiteOpenHelper {
             +  Key_Count + " INTEGER ) ";
 
     public dbHandler(Context context) {
-        super(context, "athkar.db", null, 1);
+        super(context, "athkar.db", null, 2);
     }
 
     @Override
@@ -47,9 +47,8 @@ public class dbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+//
 
-        db.execSQL("DROP TABLE IF EXISTS " + Key_TableAthaker);
-        onCreate(db);
     }
 
 
@@ -115,8 +114,6 @@ public class dbHandler extends SQLiteOpenHelper {
 
         ArrayList<theker> athkarList = new ArrayList<>();
         Cursor cursor = db.rawQuery(selectQ,null);
-
-
 
         String ThekerName = null;
         int new_Theker = 0 ;

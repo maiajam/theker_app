@@ -218,14 +218,12 @@ public class CounterActivity extends AppCompatActivity {
                     db = new dbHandler(getBaseContext());
                     db.update(theker_name, number, 0,1);
                     db.close();
-
                 }else
                 {
                     db = new dbHandler(getBaseContext());
                     db.update(theker_name, number, theker_target,0);
                     db.close();
                 }
-
             }
 
             Intent i = new Intent(getBaseContext(), listActivity.class);
