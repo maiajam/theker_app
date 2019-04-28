@@ -1,8 +1,12 @@
 package com.maiajam.counter.ui.activity;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,11 +19,14 @@ import android.view.View;
 
 import com.maiajam.counter.adapter.MyAdapter;
 import com.maiajam.counter.R;
+import com.maiajam.counter.data.local.entity.ThekerEntity;
 import com.maiajam.counter.ui.fragments.addDialoge;
 import com.maiajam.counter.data.dbHandler;
 import com.maiajam.counter.data.theker;
+import com.maiajam.counter.ui.viewModel.ThekerListViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class listActivity extends AppCompatActivity {
 
@@ -29,13 +36,35 @@ public class listActivity extends AppCompatActivity {
     MyAdapter adapter ;
     dbHandler db ;
     AlertDialog dialog ;
+    private ThekerListViewModel thekerLisrViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_);
 
-        db = new dbHandler(getBaseContext());
         recyclerView = (RecyclerView)findViewById(R.id.Rec);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
+
+        recyclerView.setLayoutManager(layoutManager);
+
+
+        thekerLisrViewModel = ViewModelProviders.of(this).get(ThekerListViewModel.class);
+        thekerLisrViewModel.getThekerList().observe(this, new Observer<List<ThekerEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<ThekerEntity> thekerEntities) {
+
+                adapter = new MyAdapter(getBaseContext(),advanceList);
+
+                recyclerView.setAdapter(adapter);
+
+                adapter.notifyDataSetChanged();
+
+            }
+        });
+        db = new dbHandler(getBaseContext());
+
 
         getSupportActionBar().setTitle("");
         SharedPreferences sp = getSharedPreferences("MyFirstVisit",0);
@@ -76,16 +105,6 @@ public class listActivity extends AppCompatActivity {
         }
 
 
-
-        adapter = new MyAdapter(getBaseContext(),advanceList);
-
-        recyclerView.setAdapter(adapter);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
-
-        recyclerView.setLayoutManager(layoutManager);
-
-        adapter.notifyDataSetChanged();
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

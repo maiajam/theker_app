@@ -15,6 +15,7 @@ import com.maiajam.counter.data.local.entity.ThekerEntity;
 public abstract class RoomManger extends RoomDatabase {
 
     private static RoomManger ourInstance ;
+    public abstract  RoomDao RoomDao();
 
     private static Callback initilizeDataBaseCallback = new Callback() {
         @Override
