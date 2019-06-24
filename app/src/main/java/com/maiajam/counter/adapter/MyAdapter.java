@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maiajam.counter.R;
+import com.maiajam.counter.data.local.entity.ThekerEntity;
 import com.maiajam.counter.util.customdrawable;
 import com.maiajam.counter.data.dbHandler;
 import com.maiajam.counter.data.theker;
@@ -26,6 +27,7 @@ import com.maiajam.counter.ui.fragments.addDialoge;
 import com.maiajam.counter.ui.activity.listActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Thread.sleep;
 
@@ -37,15 +39,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Holder> {
 
 
     Context context ;
-    ArrayList<theker> list ;
+    List<ThekerEntity> list ;
     dbHandler db ;
     theker obj ;
     Snackbar snackbar ;
     int delete ;
 
 
-
-    public MyAdapter(Context con, ArrayList<theker> l)
+    public MyAdapter(Context con, List<ThekerEntity> l)
     {
         context = con ;
         list = l ;
