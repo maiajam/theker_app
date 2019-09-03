@@ -25,12 +25,7 @@ public class ThekerTargetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theker_target);
 
-        ok_b = (Button)findViewById(R.id.ok_b);
-        reject_b=(Button)findViewById(R.id.reject_b);
-
-        editText =(EditText)findViewById(R.id.thekerTarget_edit);
-        db = new dbHandler(getBaseContext());
-
+        init();
         Bundle extra = getIntent().getExtras();
         if(extra!=null)
         {
@@ -97,6 +92,12 @@ public class ThekerTargetActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void init() {
+        ok_b = (Button)findViewById(R.id.ok_b);
+        reject_b=(Button)findViewById(R.id.reject_b);
+        editText =(EditText)findViewById(R.id.thekerTarget_edit);
     }
 
     @Override

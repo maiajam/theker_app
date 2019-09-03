@@ -4,4 +4,5 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="exsit">تريد الخروج من التطبيق ؟</string>
     <string name="oneTarget">تحديد ورد واحد لكل الاذكار</string>
+    <string name="SnackBar_TextMassage_DoTheNeeded">قم بإجراء اللازم .</string>
 </resources>

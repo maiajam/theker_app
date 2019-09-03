@@ -59,7 +59,7 @@ public class listActivity extends AppCompatActivity {
         thekerLisrViewModel.getThekerList().observe(this, new Observer<List<ThekerEntity>>() {
             @Override
             public void onChanged(@Nullable List<ThekerEntity> thekerEntities) {
-                adapter = new MyAdapter(getBaseContext(), thekerEntities);
+                adapter = new MyAdapter(getBaseContext(), thekerEntities,thekerLisrViewModel);
                 Rec.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
@@ -128,16 +128,6 @@ public class listActivity extends AppCompatActivity {
 
     private void resetAllAthkarCount() {
         thekerLisrViewModel.ResetAll();
-        thekerLisrViewModel.getAll().observe(this, new Observer<List<ThekerEntity>>() {
-            @Override
-            public void onChanged(@Nullable List<ThekerEntity> thekerEntities) {
-                adapter = new MyAdapter(getBaseContext(), thekerEntities);
-                Rec.setAdapter(adapter);
-                layoutManager = new LinearLayoutManager(getBaseContext());
-                Rec.setLayoutManager(layoutManager);
-                adapter.notifyDataSetChanged();
-            }
-        });
     }
 
     private void shareTheApp() {
