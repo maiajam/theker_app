@@ -18,6 +18,7 @@ import com.maiajam.counter.R;
 import com.maiajam.counter.ui.fragments.addDialoge;
 import com.maiajam.counter.data.dbHandler;
 import com.maiajam.counter.data.theker;
+import com.maiajam.counter.util.Constant;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,12 @@ public class listActivity extends AppCompatActivity {
     MyAdapter adapter ;
     dbHandler db ;
     AlertDialog dialog ;
+    private Bundle extra;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
+    private int theker_Type;
+    private AlertDialog.Builder d;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,43 +43,40 @@ public class listActivity extends AppCompatActivity {
 
         db = new dbHandler(getBaseContext());
         recyclerView = (RecyclerView)findViewById(R.id.Rec);
-
         getSupportActionBar().setTitle("");
-        SharedPreferences sp = getSharedPreferences("MyFirstVisit",0);
-        SharedPreferences.Editor editor = sp.edit();
+
+        checkThekerType();
 
         AthkarList = new ArrayList<>();
 
-        if(sp.getBoolean("first",true))
-        {
+        if(theker_Type == Constant.ConstantAthkar){
+            if(sp.getBoolean("first",true))
+            {
+                editor.putBoolean("first",false);
+                editor.commit();
 
+                AthkarList.add("الحمدلله");
+                AthkarList.add("استغفر الله");
+                AthkarList.add("لا اله الا انت سبحانك إني كنت من الظالمين");
+                AthkarList.add("سبحان الله وبحمده");
+                AthkarList.add("اللهم صلي على سيدنا محمد");
+                AthkarList.add("لا حول ولا قوة الا بالله");
+                AthkarList.add("الله اكبر ");
+                AthkarList.add("لا إله الا الله");
+                int i = 0 ;
+                while (i < AthkarList.size()){
+                    db.Add(AthkarList.get(i),Constant.ConstantAthkar);
+                    i++;
+                }
+                db.close();
 
-            editor.putBoolean("first",false);
-            editor.commit();
-
-            AthkarList.add("الحمدلله");
-            AthkarList.add("استغفر الله");
-            AthkarList.add("لا اله الا انت سبحانك إني كنت من الظالمين");
-            AthkarList.add("سبحان الله وبحمده");
-            AthkarList.add("اللهم صلي على سيدنا محمد");
-            AthkarList.add("لا حول ولا قوة الا بالله");
-            AthkarList.add("الله اكبر ");
-            AthkarList.add("لا إله الا الله");
-
-            int i = 0 ;
-            while (i < AthkarList.size()){
-
-                db.Add(AthkarList.get(i));
-                i++;
+            }else
+            {
+                advanceList  = db.getAll(Constant.ConstantAthkar);
             }
 
-            db.close();
-
-        }else
-        {
-
-
-            advanceList  = db.getAll();
+        }else{
+            advanceList  = db.getAll(Constant.MyAthkar);
         }
 
 
@@ -89,6 +93,11 @@ public class listActivity extends AppCompatActivity {
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        if (theker_Type == Constant.ConstantAthkar) {
+            fab.setVisibility(View.GONE);
+        } else {
+            fab.setVisibility(View.VISIBLE);
+        }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,39 +108,23 @@ public class listActivity extends AppCompatActivity {
         });
     }
 
+    private void checkThekerType() {
+        extra = getIntent().getExtras();
+        if(extra!= null)
+        {
+            theker_Type = extra.getInt(getString(R.string.extra_ThekerOption));
+        }
+         sp = getSharedPreferences("MyFirstVisit",0);
+        editor = sp.edit();
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.list,menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public void onBackPressed() {
-//        super.onBackPressed();
-
-        final AlertDialog.Builder d = new AlertDialog.Builder(this);
-
-        d.setMessage("هل أنت متأكد من الخروج ؟");
-
-        d.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                System.exit(0);
-            }
-        });
-
-        d.setNegativeButton("كلا", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog = d.create();
-        dialog.show();
     }
 
 
@@ -165,24 +158,7 @@ public class listActivity extends AppCompatActivity {
 
         }else if(id == R.id.action_ٌResetAll)
         {
-            db = new dbHandler(getBaseContext());
-            db.ResetAll();
-            //db.update();
-            db.close();
-
-            advanceList = new ArrayList<>();
-            advanceList = db.getAll();
-
-            adapter = new MyAdapter(getBaseContext(),advanceList);
-
-            recyclerView.setAdapter(adapter);
-
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
-
-            recyclerView.setLayoutManager(layoutManager);
-
-            adapter.notifyDataSetChanged();
-
+            resetAll();
         }else if(id == R.id.action_OneTargetAllٌ)
         {
                 startActivity(new Intent(listActivity.this,ThekerTargetActivity.class));
@@ -190,21 +166,54 @@ public class listActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void resetAll() {
+        asureResetAll();
+    }
+
+    private void asureResetAll() {
+         d = new AlertDialog.Builder(this);
+        d.setMessage("هل تريد تصفير كل العدادات ؟");
+
+        d.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               doResetAll();
+            }
+        });
+        d.setNegativeButton("كلا", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog = d.create();
+        dialog.show();
+    }
+
+    private void doResetAll() {
+        db = new dbHandler(getBaseContext());
+        db.ResetAll();
+        db.close();
+        advanceList = new ArrayList<>();
+        advanceList = db.getAll(theker_Type);
+        adapter = new MyAdapter(getBaseContext(),advanceList);
+        recyclerView.setAdapter(adapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
 
         advanceList = new ArrayList<>();
-        advanceList = db.getAll();
-
+        advanceList = db.getAll(theker_Type);
         adapter = new MyAdapter(getBaseContext(),advanceList);
-
         recyclerView.setAdapter(adapter);
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
-
         recyclerView.setLayoutManager(layoutManager);
-
         adapter.notifyDataSetChanged();
 
     }

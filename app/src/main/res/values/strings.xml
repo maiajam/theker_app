@@ -4,4 +4,7 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="exsit">تريد الخروج من التطبيق ؟</string>
     <string name="oneTarget">تحديد ورد واحد لكل الاذكار</string>
+    <string name="label_constantTheker">أذكار ثابتة</string>
+    <string name="label_myTheker">أذكاري الخاصة</string>
+    <string name="extra_ThekerOption">thekerOption</string>
 </resources>

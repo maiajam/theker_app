@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/counter.iml" filepath="$PROJECT_DIR$/counter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/theker_app.iml" filepath="$PROJECT_DIR$/theker_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/theker_app-app.iml" filepath="$PROJECT_DIR$/app/theker_app-app.iml" />
     </modules>
   </component>
 </project>

@@ -42,9 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     sleep(1*1000);
 
-                    Intent i = new Intent(MainActivity.this,listActivity.class);
-
-
+                    Intent i = new Intent(MainActivity.this,ThekerOptionActivity.class);
                     startActivity(i);
                     finish();
 

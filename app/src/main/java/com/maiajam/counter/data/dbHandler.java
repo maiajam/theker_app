@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.maiajam.counter.util.Constant;
+
 import java.util.ArrayList;
 
 import static android.content.ContentValues.TAG;
@@ -28,10 +30,11 @@ public class dbHandler extends SQLiteOpenHelper {
     private static final String Key_theker_Target = "ThekerTarget";
     private static final String Key_theker_achieve = "ThekerAchieve";
     private static final String Key_CompleteRatio ="CompleteRatio";
+    private static final String Key_AthkartYPE ="ThekerType";
 
     private static final String SQL_CREATE_Theker =  "CREATE TABLE " + Key_TableAthaker + " ( " + Key_Id +  " INTEGER PRIMARY KEY," +
 
-            Key_Theker_name + " TEXT,"+Key_theker_Target + " INTEGER, "+Key_theker_achieve + " INTEGER, " + Key_CompleteRatio + " REAL, "
+            Key_Theker_name + " TEXT,"+Key_theker_Target + " INTEGER, "+Key_theker_achieve + " INTEGER, " + Key_AthkartYPE + " INTEGER, " + Key_CompleteRatio + " REAL, "
             +  Key_Count + " INTEGER ) ";
 
     public dbHandler(Context context) {
@@ -52,7 +55,7 @@ public class dbHandler extends SQLiteOpenHelper {
     }
 
 
-    public void Add(String name)
+    public void Add(String name,int thekerType)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -61,6 +64,7 @@ public class dbHandler extends SQLiteOpenHelper {
         values.put(Key_theker_achieve,0);
         values.put(Key_theker_Target,0);
         values.put(Key_CompleteRatio,0);
+        values.put(Key_AthkartYPE,thekerType==Constant.ConstantAthkar?Constant.ConstantAthkar:Constant.MyAthkar);
         db.insert(Key_TableAthaker,null,values);
         db.close();
     }
@@ -69,13 +73,8 @@ public class dbHandler extends SQLiteOpenHelper {
     {
         String selectQ = "SELECT Count,ThekerTarget FROM athkar WHERE ThekerName = '" + name + "';";;
         SQLiteDatabase db = this.getReadableDatabase();
-
         theker obj = new theker();
-
         Cursor cursor = db.rawQuery(selectQ,null);
-
-
-
         if( cursor != null && cursor.moveToFirst() ){
             obj.setThekerName(name);
             obj.setTheker_target( Integer.valueOf(cursor.getInt(1))) ;
@@ -83,33 +82,28 @@ public class dbHandler extends SQLiteOpenHelper {
             cursor.close();
         }
         return obj ;
-
     }
 
     public int getThekerCount(String name)
     {
         String selectQ = "SELECT Count FROM athkar WHERE ThekerName = '" + name + "';";;
         SQLiteDatabase db = this.getReadableDatabase();
-
         int count = 0 ;
-
         Cursor cursor = db.rawQuery(selectQ,null);
-
-
-
         if( cursor != null && cursor.moveToFirst() ){
-
             count =  Integer.valueOf(cursor.getInt(0));
-
             cursor.close();
         }
         return count;
-
     }
 
-    public ArrayList<theker> getAll()
+
+    public ArrayList<theker> getAll(int thekerType)
     {
-        String selectQ = "SELECT ThekerName,id,ThekerTarget,Count,CompleteRatio FROM athkar ORDER BY CompleteRatio ASC ;";;
+        String selectQ;
+
+         selectQ = "SELECT ThekerName,id,ThekerTarget,Count,CompleteRatio FROM athkar  WHERE ThekerType == '+ thekerType +' ORDER BY CompleteRatio ASC ;";;
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         ArrayList<theker> athkarList = new ArrayList<>();

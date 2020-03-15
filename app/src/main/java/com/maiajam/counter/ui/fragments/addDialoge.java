@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.maiajam.counter.R;
 import com.maiajam.counter.data.dbHandler;
 import com.maiajam.counter.ui.activity.listActivity;
+import com.maiajam.counter.util.Constant;
 
 /**
  * Created by maiAjam on 7/22/2018.
@@ -80,11 +81,9 @@ public class addDialoge extends DialogFragment {
 
                     }else {
 
-                        db.Add(theker_txt.getText().toString());
+                        db.Add(theker_txt.getText().toString(), Constant.MyAthkar);
                         db.close();
                         getActivity().startActivity(new Intent(getActivity(), listActivity.class));
-
-
                     }
 
                     dismiss();
