@@ -236,7 +236,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Holder> {
                                     {
                                         Intent i = new Intent(context, ThekerTargetActivity.class);
                                         i.putExtra("thekerName", thker_Nmae);
-
                                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         context.startActivity(i);
                                     }else

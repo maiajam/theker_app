@@ -20,15 +20,16 @@ public class ThekerTargetActivity extends AppCompatActivity {
     dbHandler db ;
     String theker_name;
     int count ,hint;
+    private Bundle extra;
+    private int theker_Type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theker_target);
 
-        ok_b = (Button)findViewById(R.id.ok_b);
-        reject_b=(Button)findViewById(R.id.reject_b);
-
-        editText =(EditText)findViewById(R.id.thekerTarget_edit);
+        getThekerType();
+        initilizeViews();
         db = new dbHandler(getBaseContext());
 
         Bundle extra = getIntent().getExtras();
@@ -99,14 +100,26 @@ public class ThekerTargetActivity extends AppCompatActivity {
 
     }
 
+    private void getThekerType() {
+        extra = getIntent().getExtras();
+        if (extra != null) {
+            theker_Type = extra.getInt(getString(R.string.extra_ThekerOption));
+        }
+    }
+
+    private void initilizeViews() {
+        ok_b = (Button)findViewById(R.id.ok_b);
+        reject_b=(Button)findViewById(R.id.reject_b);
+        editText =(EditText)findViewById(R.id.thekerTarget_edit);
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-        finish();
         Intent i = new Intent(ThekerTargetActivity.this,listActivity.class);
-
+        i.putExtra(getString(R.string.extra_ThekerOption),theker_Type);
         startActivity(i);
+        finish();
 
     }
 }

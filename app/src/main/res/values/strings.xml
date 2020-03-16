@@ -7,4 +7,5 @@
     <string name="label_constantTheker">أذكار ثابتة</string>
     <string name="label_myTheker">أذكاري الخاصة</string>
     <string name="extra_ThekerOption">thekerOption</string>
+    <string name="label_welcomeEmptyText">إبدأ بإضافة أذكارك وتحديد وردك</string>
 </resources>

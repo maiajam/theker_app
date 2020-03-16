@@ -102,7 +102,7 @@ public class dbHandler extends SQLiteOpenHelper {
     {
         String selectQ;
 
-         selectQ = "SELECT ThekerName,id,ThekerTarget,Count,CompleteRatio FROM athkar  WHERE ThekerType == '+ thekerType +' ORDER BY CompleteRatio ASC ;";;
+         selectQ = "SELECT ThekerName,id,ThekerTarget,Count,CompleteRatio FROM athkar  WHERE ThekerType == '"+ thekerType +"' ORDER BY CompleteRatio ASC ;";;
 
         SQLiteDatabase db = this.getReadableDatabase();
 
